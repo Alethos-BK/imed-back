@@ -16,25 +16,25 @@ public class Address {
     @Column(name = "id_address")
     private Long id;
 
-    @Column(name= "cep", nullable = false)
+    @Column(name= "cep", nullable = true)
     private String cep;
 
-    @Column(name= "state", nullable = false)
+    @Column(name= "state", nullable = true)
     private String state;
 
-    @Column(name= "city", nullable = false)
+    @Column(name= "city", nullable = true)
     private String city;
 
-    @Column(name= "neighborhood", nullable = false)
+    @Column(name= "neighborhood", nullable = true)
     private String neighborhood;
 
-    @Column(name= "avenue", nullable = false)
+    @Column(name= "avenue", nullable = true)
     private String avenue;
 
-    @Column(name= "number", nullable = false)
+    @Column(name= "number", nullable = true)
     private String number;
 
-    @Column(name= "ps", nullable = false)
+    @Column(name= "ps", nullable = true)
     private String ps;
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
@@ -42,6 +42,9 @@ public class Address {
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private DoctorEntity doctor;
+
+    public Address() {
+    }
 
     public Address(Long id, String cep, String state, String city, String neighborhood, String avenue, String ps, String number, UserEntity user, DoctorEntity doctor) {
         this.id = id;

@@ -40,15 +40,6 @@ public class DoctorService {
         return doctorsDTO;
     }
 
-    public List<ImagemDTO> getImg() {
-        List<ImagemDTO> doctorsDTO = new java.util.ArrayList<>(List.of());
-        List<DoctorEntity> doctors = doctorRepository.findAll();
-        for (DoctorEntity doctor: doctors) {
-            doctorsDTO.add(new ImagemDTO(doctor));
-        }
-        return doctorsDTO;
-    }
-
 //    public DoctorDTO getById(Long id) {
 //        var entity = anyRepository.findById(id);
 //        return entity.map(item -> objectMapper.convertValue(item, DoctorDTO.class)).orElseGet(() -> null);

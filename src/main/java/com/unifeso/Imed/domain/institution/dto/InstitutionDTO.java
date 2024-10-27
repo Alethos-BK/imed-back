@@ -1,13 +1,14 @@
 package com.unifeso.Imed.domain.institution.dto;
 
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
+import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
 import com.unifeso.Imed.domain.utils.Address;
 import com.unifeso.Imed.domain.utils.ServicesEnum;
 import com.unifeso.Imed.domain.utils.SpecialtyEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -19,24 +20,24 @@ import java.util.stream.Collectors;
 public class InstitutionDTO {
     private Long id;
     private String name;
-    private Address address;
-    private String type;
-    private List<DoctorEntity> doctors;
-    private List<ServicesEnum> services;
+    private float avgScore;
+    private List<String> services;
     private List<String> specialtys;
     private String urlImage;
 
-    public InstitutionDTO(DoctorEntity doctor, String url) {
-        this.id = doctor.getId();
-        this.name = doctor.getName();
-        this.avgScore = doctor.getAvgScore();
-        this.specialtys = AddMainSpecialty(doctor.getMainSpecialty(), doctor.getSpecialtys());
-        this.urlImage = url;
-    }
+    public InstitutionDTO(InstitutionEntity institution, String url) {
+        this.id = institution.getId();
+        this.name = institution.getName();
+        this.avgScore = institution.getAvgScore();
+        Set<String> specialtySet = new LinkedHashSet<>(); // Use a Set to ensure uniqueness
 
-    private List<String> AddMainSpecialty(SpecialtyEnum specialty, List<SpecialtyEnum> specialties) {
-        specialties.addFirst(specialty);
-        return specialties.stream().map(SpecialtyEnum::getName).collect(Collectors.toList());
+        for (DoctorEntity doctor : institution.getDoctors()) {
+            specialtySet.add(doctor.getMainSpecialty().getName()); // Add main specialty
+            specialtySet.addAll(doctor.getSpecialtys().stream().map(SpecialtyEnum::getName).collect(Collectors.toList())); // Add other specialties
+        }
+
+        this.specialtys = new ArrayList<>(specialtySet);
+        this.urlImage = url;
     }
 
     public void setUrlImage(String urlImage) {

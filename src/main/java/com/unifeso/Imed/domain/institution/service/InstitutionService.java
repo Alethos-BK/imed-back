@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unifeso.Imed.domain.doctor.dto.DoctorDTO;
 import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
+import com.unifeso.Imed.domain.institution.dto.InstitutionDTO;
+import com.unifeso.Imed.domain.institution.dto.InstitutionPostDTO;
 import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
 import com.unifeso.Imed.domain.institution.repository.InstitutionRepository;
 import com.unifeso.Imed.domain.utils.Image;
@@ -29,23 +31,14 @@ public class InstitutionService {
 
     public List<InstitutionDTO> get() {
         List<InstitutionDTO> institutionsDTO = new java.util.ArrayList<>(List.of());
-        List<InstitutionEntity> doctors = institutionRepository.findAll();
-        for (InstitutionEntity doctor: doctors) {
+        List<InstitutionEntity> institutions = institutionRepository.findAll();
+        for (InstitutionEntity institution: institutions) {
             URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(INSTITUTION + GET_BY_ID + IMAGE)
-                    .buildAndExpand(doctor.getId()).toUri();
+                    .buildAndExpand(institution.getId()).toUri();
             String url = uri.toString();
             institutionsDTO.add(new InstitutionDTO(institution, url));
         }
-        return doctorsDTO;
-    }
-
-    public List<ImagemDTO> getImg() {
-        List<ImagemDTO> doctorsDTO = new java.util.ArrayList<>(List.of());
-        List<DoctorEntity> doctors = doctorRepository.findAll();
-        for (DoctorEntity doctor: doctors) {
-            doctorsDTO.add(new ImagemDTO(doctor));
-        }
-        return doctorsDTO;
+        return institutionsDTO;
     }
 
 //    public DoctorDTO getById(Long id) {
@@ -53,14 +46,14 @@ public class InstitutionService {
 //        return entity.map(item -> objectMapper.convertValue(item, DoctorDTO.class)).orElseGet(() -> null);
 //    }
 //
-    public Map<String, String> post(DoctorPostDTO dto, MultipartFile file) throws IOException {
-        var entity = objectMapper.convertValue(dto, DoctorEntity.class);
+    public Map<String, String> post(InstitutionPostDTO dto, MultipartFile file) throws IOException {
+        var entity = objectMapper.convertValue(dto, InstitutionEntity.class);
         Image image = new Image();
         image.setType(file.getContentType());
         image.setData(file.getBytes());
         entity.setMainImage(image);
-        var savedEntity = doctorRepository.save(entity);
-        savedEntity = doctorRepository.save(entity);
+        var savedEntity = institutionRepository.save(entity);
+        savedEntity = institutionRepository.save(entity);
 
         return Map.of("id", savedEntity.getId().toString());
 }
