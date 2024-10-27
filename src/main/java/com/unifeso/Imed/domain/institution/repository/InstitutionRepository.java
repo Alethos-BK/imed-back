@@ -5,5 +5,11 @@ import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface InstitutionRepository extends JpaRepository<InstitutionEntity, Long> { }
+public interface InstitutionRepository extends JpaRepository<InstitutionEntity, Long> {
+    Optional<InstitutionEntity> findById(Long id);
+
+
+}

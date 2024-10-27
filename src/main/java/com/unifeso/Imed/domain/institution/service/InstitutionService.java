@@ -20,7 +20,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import static com.unifeso.Imed.domain.doctor.controller.constants.DoctorEndpoints.DOCTOR;
+import static com.unifeso.Imed.domain.doctor.controller.constants.DoctorEndpoints.GET_BY_ID;
+import static com.unifeso.Imed.domain.doctor.controller.constants.DoctorEndpoints.IMAGE;
 import static com.unifeso.Imed.domain.institution.controller.constants.InstitutionEndpoints.*;
 
 @Service
@@ -45,11 +49,16 @@ public class InstitutionService {
         return institutionsDTO;
     }
 
-//    public DoctorDTO getById(Long id) {
-//        var entity = anyRepository.findById(id);
-//        return entity.map(item -> objectMapper.convertValue(item, DoctorDTO.class)).orElseGet(() -> null);
-//    }
-//
+    public InstitutionDTO getById(Long id) {
+        //TODO: tratamento caso não ache por id
+        Optional<InstitutionEntity> doctor = institutionRepository.findById(id);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOCTOR + GET_BY_ID + IMAGE)
+                .buildAndExpand(doctor.get().getMainImage().getId()).toUri();
+        String url = uri.toString();
+        return new InstitutionDTO(doctor.get(), url);
+    }
+
     public Map<String, String> post(InstitutionPostDTO dto, MultipartFile file) throws IOException {
         var entity = objectMapper.convertValue(dto, InstitutionEntity.class);
         Image image = new Image();

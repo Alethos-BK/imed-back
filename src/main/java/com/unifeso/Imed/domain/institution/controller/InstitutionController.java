@@ -57,12 +57,13 @@ public class InstitutionController {
         return ResponseEntity.notFound().build();
     }
 
-//    @GetMapping(GET_BY_ID)
-//    public ResponseEntity<DoctorDTO> get(@RequestHeader(TOKEN) String token, @PathVariable(ID) String id) {
-//        var dto = anyService.getById(Long.valueOf(id));
-//        return ResponseEntity.of(Optional.of(dto));
-//    }
-//
+    @GetMapping(GET_BY_ID)
+    public ResponseEntity<InstitutionDTO> getById(@PathVariable Long id) {
+        var dto = institutionService.getById(id);
+        return ResponseEntity.of(Optional.of(dto));
+    }
+
+
     @PostMapping(value = POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> post(@RequestPart InstitutionPostDTO dto, @RequestPart MultipartFile file) throws IOException {
         var id = institutionService.post(dto, file);
