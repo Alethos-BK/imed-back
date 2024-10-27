@@ -53,7 +53,7 @@ public class InstitutionService {
         //TODO: tratamento caso não ache por id
         Optional<InstitutionEntity> doctor = institutionRepository.findById(id);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOCTOR + GET_BY_ID + IMAGE)
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(INSTITUTION + GET_BY_ID + IMAGE)
                 .buildAndExpand(doctor.get().getMainImage().getId()).toUri();
         String url = uri.toString();
         return new InstitutionDTO(doctor.get(), url);
