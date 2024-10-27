@@ -6,10 +6,13 @@ import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
 import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
 import com.unifeso.Imed.domain.institution.repository.InstitutionRepository;
+import com.unifeso.Imed.domain.utils.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -24,28 +27,43 @@ public class InstitutionService {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    public List<InstitutionDTO> get() {
-//        List<InstitutionDTO> institutionsDTO = new java.util.ArrayList<>(List.of());
-//        List<InstitutionEntity> doctors = institutionRepository.findAll();
-//        for (InstitutionEntity doctor: doctors) {
-//            URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(INSTITUTION + GET_BY_ID + IMAGE)
-//                    .buildAndExpand(doctor.getId()).toUri();
-//            String url = uri.toString();
-//            institutionsDTO.add(new InstitutionDTO(institution, url));
-//        }
-//        return doctorsDTO;
-//    }
+    public List<InstitutionDTO> get() {
+        List<InstitutionDTO> institutionsDTO = new java.util.ArrayList<>(List.of());
+        List<InstitutionEntity> doctors = institutionRepository.findAll();
+        for (InstitutionEntity doctor: doctors) {
+            URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(INSTITUTION + GET_BY_ID + IMAGE)
+                    .buildAndExpand(doctor.getId()).toUri();
+            String url = uri.toString();
+            institutionsDTO.add(new InstitutionDTO(institution, url));
+        }
+        return doctorsDTO;
+    }
+
+    public List<ImagemDTO> getImg() {
+        List<ImagemDTO> doctorsDTO = new java.util.ArrayList<>(List.of());
+        List<DoctorEntity> doctors = doctorRepository.findAll();
+        for (DoctorEntity doctor: doctors) {
+            doctorsDTO.add(new ImagemDTO(doctor));
+        }
+        return doctorsDTO;
+    }
 
 //    public DoctorDTO getById(Long id) {
 //        var entity = anyRepository.findById(id);
 //        return entity.map(item -> objectMapper.convertValue(item, DoctorDTO.class)).orElseGet(() -> null);
 //    }
 //
-//    public Map<String, String> post(DoctorPostDTO dto) {
-//        var entity = objectMapper.convertValue(dto, DoctorEntity.class);
-//        var savedEntity = doctorRepository.save(entity);
-//        return Map.of("id", savedEntity.getId().toString());
-//    }
+    public Map<String, String> post(DoctorPostDTO dto, MultipartFile file) throws IOException {
+        var entity = objectMapper.convertValue(dto, DoctorEntity.class);
+        Image image = new Image();
+        image.setType(file.getContentType());
+        image.setData(file.getBytes());
+        entity.setMainImage(image);
+        var savedEntity = doctorRepository.save(entity);
+        savedEntity = doctorRepository.save(entity);
+
+        return Map.of("id", savedEntity.getId().toString());
+}
 //
 //    public void put(Long id, DoctorDTO dto) {
 //        var entity = objectMapper.convertValue(dto, DoctorEntity.class);

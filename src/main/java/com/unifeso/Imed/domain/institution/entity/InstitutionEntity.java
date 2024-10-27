@@ -40,6 +40,9 @@ public class InstitutionEntity {
     @Column(name= "services", nullable = false)
     private List<ServicesEnum> services;
 
+    @Column(name= "avg_score", nullable = true)
+    private float avgScore;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_main_image", nullable = true)
     private Image mainImage;
@@ -47,14 +50,23 @@ public class InstitutionEntity {
     public InstitutionEntity() {
     }
 
-    public InstitutionEntity(Long id, String name, Address address, String type, List<DoctorEntity> doctors, List<ServicesEnum> services, Image mainImage) {
+    public InstitutionEntity(Long id, String name, Address address, String type, List<DoctorEntity> doctors, List<ServicesEnum> services, float avgScore, Image mainImage) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.type = type;
         this.doctors = doctors;
         this.services = services;
+        this.avgScore = avgScore;
         this.mainImage = mainImage;
+    }
+
+    public float getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(float avgScore) {
+        this.avgScore = avgScore;
     }
 
     public Image getMainImage() {
