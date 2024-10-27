@@ -39,6 +39,7 @@ public class DoctorPostDTO {
     private SpecialtyEnum mainSpecialty;
     private Image mainImage;
     private Address address;
+    private float avgScore;
 
     public Image getMainImage() {
         return mainImage;
