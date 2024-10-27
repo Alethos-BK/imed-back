@@ -5,6 +5,8 @@ import com.unifeso.Imed.domain.doctor.dto.DoctorDTO;
 import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
 import com.unifeso.Imed.domain.doctor.repository.DoctorRepository;
+import com.unifeso.Imed.domain.usuario.dto.UserIADTO;
+import com.unifeso.Imed.domain.utils.HobbiesEnum;
 import com.unifeso.Imed.domain.utils.Image;
 import com.unifeso.Imed.domain.utils.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.unifeso.Imed.domain.doctor.controller.constants.DoctorEndpoints.*;
 
@@ -25,6 +29,7 @@ public class DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
     private ImageRepository imageRepository;
     @Autowired
     private ObjectMapper objectMapper;
@@ -77,4 +82,26 @@ public class DoctorService {
 //    public void delete(Long id) {
 //        anyRepository.deleteById(id);
 //    }
+
+    public void obterListaPreferencia(UserIADTO userPreference) {
+        List<DoctorEntity> doctors = doctorRepository.findAll();
+        List<UserIADTO> detailsDoctors = new ArrayList<>();
+        detailsDoctors.add(userPreference);
+
+        for (DoctorEntity doctor : doctors) {
+            List<String> hobbies = doctor.getCharacteristics().getHobbies()
+                    .stream()
+                    .map(HobbiesEnum::getName)
+                    .collect(Collectors.toList());
+
+
+            detailsDoctors.add(new UserIADTO(
+                    doctor.getId(),
+                    doctor.getCharacteristics().getAgeRange().getName(),
+                    doctor.getCharacteristics().getIdGenero().getName(),
+                    doctor.getCharacteristics().getPersonality().getName(),
+                    hobbies.getFirst()));
+
+        }
+    }
 }

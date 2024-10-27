@@ -17,6 +17,38 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @Builder
 public class DoctorDTO {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(float avgScore) {
+        this.avgScore = avgScore;
+    }
+
+    public List<String> getSpecialtys() {
+        return specialtys;
+    }
+
+    public void setSpecialtys(List<String> specialtys) {
+        this.specialtys = specialtys;
+    }
+
     private Long id;
     private String name;
     private float avgScore;

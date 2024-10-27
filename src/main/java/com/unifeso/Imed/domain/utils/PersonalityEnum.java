@@ -32,4 +32,8 @@ public enum PersonalityEnum {
         this.id = id;
         this.nome = nome;
     }
+
+    public String getName() {
+        return nome;
+    }
 }
