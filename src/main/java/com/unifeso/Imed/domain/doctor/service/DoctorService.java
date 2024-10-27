@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.unifeso.Imed.domain.doctor.controller.constants.DoctorEndpoints.*;
 
@@ -38,6 +39,16 @@ public class DoctorService {
             doctorsDTO.add(new DoctorDTO(doctor, url));
         }
         return doctorsDTO;
+    }
+
+    public DoctorDTO getById(Long id) {
+        //TODO: tratamento caso não ache por id
+        Optional<DoctorEntity> doctor = doctorRepository.findById(id);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOCTOR + GET_BY_ID + IMAGE)
+                .buildAndExpand(doctor.get().getMainImage().getId()).toUri();
+        String url = uri.toString();
+        return new DoctorDTO(doctor.get(), url);
     }
 
 //    public DoctorDTO getById(Long id) {

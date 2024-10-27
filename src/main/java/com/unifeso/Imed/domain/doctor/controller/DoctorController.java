@@ -40,6 +40,12 @@ public class DoctorController {
         return ResponseEntity.of(Optional.of(dto));
     }
 
+    @GetMapping(GET_BY_ID)
+    public ResponseEntity<DoctorDTO> getById(@PathVariable Long id) {
+        var dto = doctorService.getById(id);
+        return ResponseEntity.of(Optional.of(dto));
+    }
+
     @GetMapping(GET_BY_ID + IMAGE)
     public ResponseEntity<byte[]> getImg(@PathVariable Long id) {
         Optional<Image> image = imageService.getImg(id);
