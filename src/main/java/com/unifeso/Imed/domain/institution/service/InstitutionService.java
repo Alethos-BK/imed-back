@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unifeso.Imed.domain.doctor.dto.DoctorDTO;
 import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
+import com.unifeso.Imed.domain.doctor.repository.DoctorRepository;
 import com.unifeso.Imed.domain.institution.dto.InstitutionDTO;
 import com.unifeso.Imed.domain.institution.dto.InstitutionPostDTO;
 import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +29,8 @@ public class InstitutionService {
     @Autowired
     private InstitutionRepository institutionRepository;
     @Autowired
+    private DoctorRepository doctorRepository;
+    @Autowired
     private ObjectMapper objectMapper;
 
     public List<InstitutionDTO> get() {
@@ -34,7 +38,7 @@ public class InstitutionService {
         List<InstitutionEntity> institutions = institutionRepository.findAll();
         for (InstitutionEntity institution: institutions) {
             URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path(INSTITUTION + GET_BY_ID + IMAGE)
-                    .buildAndExpand(institution.getId()).toUri();
+                    .buildAndExpand(institution.getMainImage().getId()).toUri();
             String url = uri.toString();
             institutionsDTO.add(new InstitutionDTO(institution, url));
         }
@@ -52,8 +56,15 @@ public class InstitutionService {
         image.setType(file.getContentType());
         image.setData(file.getBytes());
         entity.setMainImage(image);
+
+        for (DoctorEntity doctor : entity.getDoctors()) {
+            if (doctor.getId() == null) {
+               return null;
+            }
+            doctor = doctorRepository.getById(doctor.getId());
+        }
+
         var savedEntity = institutionRepository.save(entity);
-        savedEntity = institutionRepository.save(entity);
 
         return Map.of("id", savedEntity.getId().toString());
 }

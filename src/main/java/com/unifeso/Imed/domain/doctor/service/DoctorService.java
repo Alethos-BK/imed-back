@@ -51,8 +51,8 @@ public class DoctorService {
         image.setType(file.getContentType());
         image.setData(file.getBytes());
         entity.setMainImage(image);
+
         var savedEntity = doctorRepository.save(entity);
-        savedEntity = doctorRepository.save(entity);
 
         return Map.of("id", savedEntity.getId().toString());
     }

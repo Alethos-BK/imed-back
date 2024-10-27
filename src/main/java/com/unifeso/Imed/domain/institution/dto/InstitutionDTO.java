@@ -29,14 +29,14 @@ public class InstitutionDTO {
         this.id = institution.getId();
         this.name = institution.getName();
         this.avgScore = institution.getAvgScore();
-        Set<String> specialtySet = new LinkedHashSet<>(); // Use a Set to ensure uniqueness
+//        Set<String> specialtySet = new LinkedHashSet<>();
 
-        for (DoctorEntity doctor : institution.getDoctors()) {
-            specialtySet.add(doctor.getMainSpecialty().getName()); // Add main specialty
-            specialtySet.addAll(doctor.getSpecialtys().stream().map(SpecialtyEnum::getName).collect(Collectors.toList())); // Add other specialties
-        }
-
-        this.specialtys = new ArrayList<>(specialtySet);
+//        for (DoctorEntity doctor : institution.getDoctors()) {
+//            specialtySet.add(doctor.getMainSpecialty().getName()); /
+//            specialtySet.addAll(doctor.getSpecialtys().stream().map(SpecialtyEnum::getName).collect(Collectors.toList())); // Add other specialties
+//        }
+//
+//        this.specialtys = new ArrayList<>(specialtySet);
         this.urlImage = url;
     }
 

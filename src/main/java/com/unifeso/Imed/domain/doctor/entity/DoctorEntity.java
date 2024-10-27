@@ -19,20 +19,20 @@ public class DoctorEntity {
 
     @Id
     @GeneratedValue
-    @JsonIgnore
     @Column(name = "id_doctor")
     private Long id;
 
 
-    @Column(name= "name", nullable = false)
+    @Column(name= "name", nullable = true)
     private String name;
 
-    @Column(name= "formacao", nullable = false)
+    @Column(name= "formacao", nullable = true)
     private String formacao;
 
-    @Column(name= "descricao", nullable = false)
+    @Column(name= "descricao", nullable = true)
     private String descricao;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "doctor_institution",
             joinColumns = @JoinColumn(name = "id_doctor"),
@@ -43,15 +43,15 @@ public class DoctorEntity {
     @JoinColumn(name = "id_characteristics", nullable = true)
     private Characterization characteristics;
 
-    @Column(name= "is_remote", nullable = false)
+    @Column(name= "is_remote", nullable = true)
     @JsonProperty("isRemote")
     private boolean isRemote;
 
-    @Column(name= "is_at_workplace", nullable = false)
+    @Column(name= "is_at_workplace", nullable = true)
     @JsonProperty("isAtWorkplace")
     private boolean isAtWorkplace;
 
-    @Column(name= "is_at_home", nullable = false)
+    @Column(name= "is_at_home", nullable = true)
     @JsonProperty("isAtHome")
     private boolean isAtHome;
 
@@ -61,7 +61,7 @@ public class DoctorEntity {
     @Column(name= "avg_score", nullable = true)
     private float avgScore;
 
-    @Column(name= "crm", nullable = false)
+    @Column(name= "crm", nullable = true)
     private String crm;
 
     @Column(name= "specialtys", nullable = true)
