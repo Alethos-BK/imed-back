@@ -4,26 +4,26 @@ import lombok.Getter;
 
 @Getter
 public enum HobbiesEnum {
-    READING(1, "Leitura"),
-    TRAVELING(2, "Viagem"),
-    COOKING(3, "Culinária"),
-    GARDENING(4, "Jardinagem"),
-    PAINTING(5, "Pintura"),
-    PHOTOGRAPHY(6, "Fotografia"),
-    HIKING(7, "Caminhadas"),
-    FISHING(8, "Pesca"),
-    PLAYING_MUSIC(9, "Tocar Música"),
-    DANCING(10, "Dança"),
-    CRAFTING(11, "Artesanato"),
-    WRITING(12, "Escrita"),
-    PLAYING_VIDEO_GAMES(13, "Jogos Eletrônicos"),
-    COLLECTING(14, "Colecionismo"),
-    YOGA(15, "Yoga"),
-    KNITTING(16, "Tricô"),
-    RUNNING(17, "Corrida"),
-    SWIMMING(18, "Natação"),
-    VOLUNTEERING(19, "Trabalho Voluntário"),
-    BOARD_GAMES(20, "Jogos de Tabuleiro");
+    READING(0, "Leitura"),
+    TRAVELING(1, "Viagem"),
+    COOKING(2, "Culinária"),
+    GARDENING(3, "Jardinagem"),
+    PAINTING(4, "Pintura"),
+    PHOTOGRAPHY(5, "Fotografia"),
+    HIKING(6, "Caminhadas"),
+    FISHING(7, "Pesca"),
+    PLAYING_MUSIC(8, "Tocar Música"),
+    DANCING(9, "Dança"),
+    CRAFTING(10, "Artesanato"),
+    WRITING(11, "Escrita"),
+    PLAYING_VIDEO_GAMES(12, "Jogos Eletrônicos"),
+    COLLECTING(13, "Colecionismo"),
+    YOGA(14, "Yoga"),
+    KNITTING(15, "Tricô"),
+    RUNNING(16, "Corrida"),
+    SWIMMING(17, "Natação"),
+    VOLUNTEERING(18, "Trabalho Voluntário"),
+    BOARD_GAMES(19, "Jogos de Tabuleiro");
 
     private int id;
     private String nome;

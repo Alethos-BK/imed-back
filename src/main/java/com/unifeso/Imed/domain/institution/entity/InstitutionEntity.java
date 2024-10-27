@@ -3,6 +3,7 @@ package com.unifeso.Imed.domain.institution.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
 import com.unifeso.Imed.domain.utils.Address;
+import com.unifeso.Imed.domain.utils.Image;
 import com.unifeso.Imed.domain.utils.ServicesEnum;
 import com.unifeso.Imed.domain.utils.SpecialtyEnum;
 import jakarta.persistence.*;
@@ -39,13 +40,29 @@ public class InstitutionEntity {
     @Column(name= "services", nullable = false)
     private List<ServicesEnum> services;
 
-    public InstitutionEntity(Long id, String name, Address address, String type, List<DoctorEntity> doctors, List<ServicesEnum> services) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_main_image", nullable = true)
+    private Image mainImage;
+
+    public InstitutionEntity() {
+    }
+
+    public InstitutionEntity(Long id, String name, Address address, String type, List<DoctorEntity> doctors, List<ServicesEnum> services, Image mainImage) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.type = type;
         this.doctors = doctors;
         this.services = services;
+        this.mainImage = mainImage;
+    }
+
+    public Image getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(Image mainImage) {
+        this.mainImage = mainImage;
     }
 
     public Address getAddress() {

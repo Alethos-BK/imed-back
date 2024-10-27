@@ -39,4 +39,12 @@ public class DoctorPostDTO {
     private SpecialtyEnum mainSpecialty;
     private Image mainImage;
     private Address address;
+
+    public Image getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(Image mainImage) {
+        this.mainImage = mainImage;
+    }
 }

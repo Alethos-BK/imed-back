@@ -1,6 +1,7 @@
 package com.unifeso.Imed.domain.doctor.dto;
 
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
+import com.unifeso.Imed.domain.utils.Image;
 import com.unifeso.Imed.domain.utils.SpecialtyEnum;
 import lombok.*;
 

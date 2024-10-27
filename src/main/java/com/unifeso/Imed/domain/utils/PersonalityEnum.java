@@ -4,26 +4,26 @@ import lombok.Getter;
 
 @Getter
 public enum PersonalityEnum {
-    INTROVERT(1, "Introvertido"),
-    EXTROVERT(2, "Extrovertido"),
-    AMBIVERT(3, "Ambivertido"),
-    THINKER(4, "Pensador"),
-    FEELER(5, "Sentidor"),
-    JUDGING(6, "Julgador"),
-    PERCEIVING(7, "Perceptivo"),
-    SENSING(8, "Sensorial"),
-    INTUITIVE(9, "Intuitivo"),
-    ANALYTICAL(10, "Analítico"),
-    CREATIVE(11, "Criativo"),
-    PRACTICAL(12, "Prático"),
-    OPTIMISTIC(13, "Otimista"),
-    PESSIMISTIC(14, "Pessimista"),
-    ASSERTIVE(15, "Afirmativo"),
-    PASSIVE(16, "Passivo"),
-    EMPATHETIC(17, "Empático"),
-    RESILIENT(18, "Resiliente"),
-    DETERMINED(19, "Determinado"),
-    FLEXIBLE(20, "Flexível");
+    INTROVERT(0, "Introvertido"),
+    EXTROVERT(1, "Extrovertido"),
+    AMBIVERT(2, "Ambivertido"),
+    THINKER(3, "Pensador"),
+    FEELER(4, "Sentidor"),
+    JUDGING(5, "Julgador"),
+    PERCEIVING(6, "Perceptivo"),
+    SENSING(7, "Sensorial"),
+    INTUITIVE(8, "Intuitivo"),
+    ANALYTICAL(9, "Analítico"),
+    CREATIVE(10, "Criativo"),
+    PRACTICAL(11, "Prático"),
+    OPTIMISTIC(12, "Otimista"),
+    PESSIMISTIC(13, "Pessimista"),
+    ASSERTIVE(14, "Afirmativo"),
+    PASSIVE(15, "Passivo"),
+    EMPATHETIC(16, "Empático"),
+    RESILIENT(17, "Resiliente"),
+    DETERMINED(18, "Determinado"),
+    FLEXIBLE(19, "Flexível");
 
     private int id;
     private String nome;

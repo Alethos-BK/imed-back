@@ -4,26 +4,26 @@ import lombok.Getter;
 
 @Getter
 public enum ServicesEnum {
-    BLOOD_COLLECTION(1, "Coleta de Sangue"),
-    IMAGING(2, "Imagens Médicas"),
-    LAB_TESTS(3, "Exames Laboratoriais"),
-    VACCINATION(4, "Vacinação"),
-    PHYSIOTHERAPY(5, "Fisioterapia"),
-    EMERGENCY_CARE(6, "Atendimento de Emergência"),
-    SURGERY(7, "Cirurgia"),
-    MATERNITY_SERVICES(8, "Serviços de Maternidade"),
-    PSYCHOLOGICAL_SUPPORT(9, "Apoio Psicológico"),
-    NUTRITIONAL_GUIDANCE(10, "Orientação Nutricional"),
-    REHABILITATION(11, "Reabilitação"),
-    MEDICATION_DISPENSING(12, "Dispensação de Medicamentos"),
-    CHRONIC_DISEASE_MANAGEMENT(13, "Gerenciamento de Doenças Crônicas"),
-    TELEMEDICINE(14, "Telemedicina"),
-    DENTAL_SERVICES(15, "Serviços Odontológicos"),
-    OCCUPATIONAL_HEALTH(16, "Saúde Ocupacional"),
-    ENDOSCOPY(17, "Endoscopia"),
-    ANESTHESIA_SERVICES(18, "Serviços de Anestesia"),
-    ALLERGY_TESTING(19, "Testes de Alergia"),
-    PALLIATIVE_CARE(20, "Cuidados Paliativos");
+    BLOOD_COLLECTION(0, "Coleta de Sangue"),
+    IMAGING(1, "Imagens Médicas"),
+    LAB_TESTS(2, "Exames Laboratoriais"),
+    VACCINATION(3, "Vacinação"),
+    PHYSIOTHERAPY(4, "Fisioterapia"),
+    EMERGENCY_CARE(5, "Atendimento de Emergência"),
+    SURGERY(6, "Cirurgia"),
+    MATERNITY_SERVICES(7, "Serviços de Maternidade"),
+    PSYCHOLOGICAL_SUPPORT(8, "Apoio Psicológico"),
+    NUTRITIONAL_GUIDANCE(9, "Orientação Nutricional"),
+    REHABILITATION(10, "Reabilitação"),
+    MEDICATION_DISPENSING(11, "Dispensação de Medicamentos"),
+    CHRONIC_DISEASE_MANAGEMENT(12, "Gerenciamento de Doenças Crônicas"),
+    TELEMEDICINE(13, "Telemedicina"),
+    DENTAL_SERVICES(14, "Serviços Odontológicos"),
+    OCCUPATIONAL_HEALTH(15, "Saúde Ocupacional"),
+    ENDOSCOPY(16, "Endoscopia"),
+    ANESTHESIA_SERVICES(17, "Serviços de Anestesia"),
+    ALLERGY_TESTING(18, "Testes de Alergia"),
+    PALLIATIVE_CARE(19, "Cuidados Paliativos");
 
     private int id;
     private String nome;
