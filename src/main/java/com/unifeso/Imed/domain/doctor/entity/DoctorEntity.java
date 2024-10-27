@@ -1,8 +1,10 @@
 package com.unifeso.Imed.domain.doctor.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.unifeso.Imed.domain.institution.entity.InstitutionEntity;
 import com.unifeso.Imed.domain.rating.entity.RatingEntity;
+import com.unifeso.Imed.domain.utils.Address;
 import com.unifeso.Imed.domain.utils.Characterization;
 import com.unifeso.Imed.domain.utils.Image;
 import com.unifeso.Imed.domain.utils.SpecialtyEnum;
@@ -18,9 +20,65 @@ public class DoctorEntity {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_doctor")
     private Long id;
 
-    public DoctorEntity(Long id, String name, String formacao, String descricao, List<InstitutionEntity> institutions, Characterization characteristics, boolean isRemote, boolean isAtWorkplace, boolean isAtHome, List<RatingEntity> ratings, float avgScore, String crm, List<SpecialtyEnum> specialtys, SpecialtyEnum mainSpecialty, Image mainImage) {
+
+    @Column(name= "name", nullable = false)
+    private String name;
+
+    @Column(name= "formacao", nullable = false)
+    private String formacao;
+
+    @Column(name= "descricao", nullable = false)
+    private String descricao;
+
+    @ManyToMany
+    @JoinTable(name = "doctor_institution",
+            joinColumns = @JoinColumn(name = "id_doctor"),
+            inverseJoinColumns = @JoinColumn(name = "id_institution"))
+    private List<InstitutionEntity> institutions;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_characteristics", nullable = true)
+    private Characterization characteristics;
+
+    @Column(name= "is_remote", nullable = false)
+    @JsonProperty("isRemote")
+    private boolean isRemote;
+
+    @Column(name= "is_at_workplace", nullable = false)
+    @JsonProperty("isAtWorkplace")
+    private boolean isAtWorkplace;
+
+    @Column(name= "is_at_home", nullable = false)
+    @JsonProperty("isAtHome")
+    private boolean isAtHome;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<RatingEntity> ratings;
+
+    @Column(name= "avg_score", nullable = true)
+    private float avgScore;
+
+    @Column(name= "crm", nullable = false)
+    private String crm;
+
+    @Column(name= "specialtys", nullable = true)
+    private List<SpecialtyEnum> specialtys;
+
+    @Column(name= "main_specialty", nullable = true)
+    private SpecialtyEnum mainSpecialty;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_main_image", nullable = true)
+    private Image mainImage;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_address", nullable = true)
+    private Address address;
+
+    public DoctorEntity(Long id, String name, String formacao, String descricao, List<InstitutionEntity> institutions, Characterization characteristics, boolean isRemote, boolean isAtWorkplace, boolean isAtHome, List<RatingEntity> ratings, float avgScore, String crm, List<SpecialtyEnum> specialtys, SpecialtyEnum mainSpecialty, Image mainImage, Address address) {
         this.id = id;
         this.name = name;
         this.formacao = formacao;
@@ -36,6 +94,10 @@ public class DoctorEntity {
         this.specialtys = specialtys;
         this.mainSpecialty = mainSpecialty;
         this.mainImage = mainImage;
+        this.address = address;
+    }
+
+    public DoctorEntity() {
     }
 
     public String getCrm() {
@@ -56,6 +118,14 @@ public class DoctorEntity {
 
     public SpecialtyEnum getMainSpecialty() {
         return mainSpecialty;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setMainSpecialty(SpecialtyEnum mainSpecialty) {
@@ -157,51 +227,4 @@ public class DoctorEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Column(name= "name", nullable = false)
-    private String name;
-
-    @Column(name= "formacao", nullable = false)
-    private String formacao;
-
-    @Column(name= "descricao", nullable = false)
-    private String descricao;
-
-    @ManyToMany
-    @JoinTable(name = "doctor_institution",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id"))
-    private List<InstitutionEntity> institutions;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
-    private Characterization characteristics;
-
-    @Column(name= "is_remote", nullable = false)
-    private boolean isRemote;
-
-    @Column(name= "is_at_workplace", nullable = false)
-    private boolean isAtWorkplace;
-
-    @Column(name= "is_at_home", nullable = false)
-    private boolean isAtHome;
-
-    @Column(name= "ratings", nullable = true)
-    private List<RatingEntity> ratings;
-
-    @Column(name= "avg_score", nullable = true)
-    private float avgScore;
-
-    @Column(name= "crm", nullable = false)
-    private String crm;
-
-    @Column(name= "specialtys", nullable = false)
-    private List<SpecialtyEnum> specialtys;
-
-    @Column(name= "main_specialty", nullable = false)
-    private SpecialtyEnum mainSpecialty;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
-    private Image mainImage;
 }

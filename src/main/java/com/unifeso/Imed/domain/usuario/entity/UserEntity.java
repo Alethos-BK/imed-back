@@ -11,28 +11,32 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name= "user")
+@Table(name= "app_user")
 public class UserEntity {
 
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_user")
     private Long id;
 
     @Column(name= "name", nullable = false)
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_address", nullable = false)
     private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_main_image", nullable = false)
     private Image mainImage;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_characterization", nullable = false)
     private Characterization preferences;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<RatingEntity> ratings;
 
     public UserEntity(Long id, String name, Address address, Image mainImage, Characterization preferences, List<RatingEntity> ratings) {
         this.id = id;
@@ -90,8 +94,4 @@ public class UserEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
-    private List<RatingEntity> ratings;
 }

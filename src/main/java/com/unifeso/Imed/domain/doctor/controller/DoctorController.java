@@ -1,6 +1,7 @@
 package com.unifeso.Imed.domain.doctor.controller;
 
 import com.unifeso.Imed.domain.doctor.dto.DoctorDTO;
+import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,12 @@ public class DoctorController {
 //        return ResponseEntity.of(Optional.of(dto));
 //    }
 //
-//    @PostMapping(POST)
-//    public ResponseEntity<Object> post(@RequestBody DoctorDTO dto) {
-//        var id = anyService.post(dto);
-//        return new ResponseEntity(id, HttpStatus.CREATED);
-//    }
+    @PostMapping(POST)
+    public ResponseEntity<Object> post(@RequestBody DoctorPostDTO dto) {
+        var id = doctorService.post(dto);
+        return new ResponseEntity(id, HttpStatus.CREATED);
+    }
+
 //
 //    @PutMapping(PUT)
 //    public ResponseEntity<Void> put(@PathVariable(ID) String id, @RequestBody DoctorDTO dto) {

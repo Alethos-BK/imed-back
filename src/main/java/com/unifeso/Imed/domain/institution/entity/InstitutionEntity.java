@@ -17,10 +17,27 @@ public class InstitutionEntity {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_institution")
     private Long id;
 
     @Column(name= "name", nullable = false)
     private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_address", nullable = false)
+    private Address address;
+
+    @Column(name= "type", nullable = false)
+    private String type;
+
+    @ManyToMany
+    @JoinTable(name = "doctor_institution",
+            joinColumns = @JoinColumn(name = "id_institution"),
+            inverseJoinColumns = @JoinColumn(name = "id_doctor"))
+    private List<DoctorEntity> doctors;
+
+    @Column(name= "services", nullable = false)
+    private List<ServicesEnum> services;
 
     public InstitutionEntity(Long id, String name, Address address, String type, List<DoctorEntity> doctors, List<ServicesEnum> services) {
         this.id = id;
@@ -78,20 +95,4 @@ public class InstitutionEntity {
     public void setServices(List<ServicesEnum> services) {
         this.services = services;
     }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
-    private Address address;
-
-    @Column(name= "type", nullable = false)
-    private String type;
-
-    @ManyToMany
-    @JoinTable(name = "doctor_institution",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id"))
-    private List<DoctorEntity> doctors;
-
-    @Column(name= "services", nullable = false)
-    private List<ServicesEnum> services;
 }

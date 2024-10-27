@@ -13,6 +13,7 @@ public class Address {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_address")
     private Long id;
 
     @Column(name= "cep", nullable = false)
@@ -32,6 +33,15 @@ public class Address {
 
     @Column(name= "number", nullable = false)
     private String number;
+
+    @Column(name= "ps", nullable = false)
+    private String ps;
+
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private UserEntity user;
+
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private DoctorEntity doctor;
 
     public Address(Long id, String cep, String state, String city, String neighborhood, String avenue, String ps, String number, UserEntity user, DoctorEntity doctor) {
         this.id = id;
@@ -125,15 +135,4 @@ public class Address {
     public void setDoctor(DoctorEntity doctor) {
         this.doctor = doctor;
     }
-
-    @Column(name= "ps", nullable = false)
-    private String ps;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private UserEntity user;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private DoctorEntity doctor;
 }

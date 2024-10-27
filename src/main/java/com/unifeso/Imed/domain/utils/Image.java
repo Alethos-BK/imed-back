@@ -13,6 +13,7 @@ public class Image {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_image")
     private Long id;
 
     @Lob
@@ -23,13 +24,11 @@ public class Image {
     private String type;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = true)
+    @OneToOne(mappedBy = "mainImage", cascade = CascadeType.ALL)
     private DoctorEntity doctor;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = true)
+    @OneToOne(mappedBy = "mainImage", cascade = CascadeType.ALL)
     private UserEntity user;
 
     public Long getId() {
@@ -78,5 +77,8 @@ public class Image {
         this.type = type;
         this.user = user;
         this.doctor = doctor;
+    }
+
+    public Image() {
     }
 }

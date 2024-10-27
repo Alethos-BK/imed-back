@@ -13,11 +13,22 @@ public class RatingEntity {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_rating")
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_user")
     private UserEntity user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_doctor")
+    private DoctorEntity doctor;
+
+    @Column(name= "comment", nullable = true)
+    private String comment;
+
+    @Column(name= "score", nullable = false)
+    private boolean score;
 
     public RatingEntity(Long id, boolean score, String comment, DoctorEntity doctor, UserEntity user) {
         this.id = id;
@@ -66,14 +77,4 @@ public class RatingEntity {
     public void setScore(boolean score) {
         this.score = score;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private DoctorEntity doctor;
-
-    @Column(name= "comment", nullable = true)
-    private String comment;
-
-    @Column(name= "score", nullable = false)
-    private boolean score;
 }

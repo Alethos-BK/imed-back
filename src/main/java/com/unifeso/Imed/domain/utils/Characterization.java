@@ -15,27 +15,39 @@ public class Characterization {
     @Id
     @GeneratedValue
     @JsonIgnore
+    @Column(name = "id_characterization")
     private Long id;
 
-    @Column(name= "id_genero", nullable = false)
+    @Column(name= "id_genero", nullable = true)
     private IdGeneroEnum idGenero;
 
-    @Column(name= "hobbies", nullable = false)
+    @Column(name= "hobbies", nullable = true)
     private List<HobbiesEnum> hobbies;
 
-    @Column(name= "age_range", nullable = false)
+    @Column(name= "age_range", nullable = true)
     private AgeRangeEnum ageRange;
 
-    @Column(name= "personality", nullable = false)
+    @Column(name= "personality", nullable = true)
     private PersonalityEnum personality;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @OneToOne(mappedBy = "preferences", cascade = CascadeType.ALL)
     private UserEntity user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @OneToOne(mappedBy = "characteristics", cascade = CascadeType.ALL)
     private DoctorEntity doctor;
+
+    public Characterization(Long id, IdGeneroEnum idGenero, List<HobbiesEnum> hobbies, AgeRangeEnum ageRange, PersonalityEnum personality, UserEntity user, DoctorEntity doctor) {
+        this.id = id;
+        this.idGenero = idGenero;
+        this.hobbies = hobbies;
+        this.ageRange = ageRange;
+        this.personality = personality;
+        this.user = user;
+        this.doctor = doctor;
+    }
+
+    public Characterization() {
+    }
 
     public Long getId() {
         return id;

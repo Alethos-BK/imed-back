@@ -2,6 +2,7 @@ package com.unifeso.Imed.domain.doctor.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unifeso.Imed.domain.doctor.dto.DoctorDTO;
+import com.unifeso.Imed.domain.doctor.dto.DoctorPostDTO;
 import com.unifeso.Imed.domain.doctor.entity.DoctorEntity;
 import com.unifeso.Imed.domain.doctor.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class DoctorService {
 //        return entity.map(item -> objectMapper.convertValue(item, DoctorDTO.class)).orElseGet(() -> null);
 //    }
 //
-    public Map<String, String> post(DoctorDTO dto) {
+    public Map<String, String> post(DoctorPostDTO dto) {
         var entity = objectMapper.convertValue(dto, DoctorEntity.class);
         var savedEntity = doctorRepository.save(entity);
         return Map.of("id", savedEntity.getId().toString());
